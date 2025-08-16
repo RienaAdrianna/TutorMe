@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutor Profile</title>
+    <title>Tutor Profile - UQ TutorMe </title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -147,6 +148,7 @@
                 <div class="bg-white border-0 shadow-lg rounded-lg overflow-hidden">
                     <div class="px-6 py-4 border-b border-gray-200">
                         <h3 class="text-lg font-medium text-gray-900">Subjects I Teach</h3>
+                        <h3 class="text-lg font-medium text-gray-900">Subjects I Tutor</h3>
                     </div>
                     <div class="p-6">
                         <div id="subjectsList" class="flex flex-wrap gap-3">
@@ -184,7 +186,8 @@
                     <div class="p-6">
                         
                         <div id="contactButton" class="space-y-4">
-                            <button onclick="showBookingForm()" class="w-full bg-purple-700 hover:bg-purple-800 h-12 text-lg font-semibold text-white rounded-md flex items-center justify-center">
+                            <button onclick="showBookingForm()" class="w-full h-12 text-lg font-semibold text-white rounded-md flex items-center justify-center" style="background-color: #51247A;" o
+                            nmouseover="this.style.backgroundColor='#3d1b5c'" onmouseout="this.style.backgroundColor='#51247A'">
                                 <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
                                 Contact This Tutor
                             </button>
@@ -228,7 +231,8 @@
                                 <button type="button" onclick="hideBookingForm()" class="flex-1 bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
                                     Cancel
                                 </button>
-                                <button type="submit" id="submitButton" class="flex-1 bg-purple-700 hover:bg-purple-800 text-white font-medium py-2 px-4 rounded-md">
+                                <button type="submit" id="submitButton" class="flex-1 text-white font-medium py-2 px-4 rounded-md" style="background-color: #51247A;" 
+                                onmouseover="this.style.backgroundColor='#3d1b5c'" onmouseout="this.style.backgroundColor='#51247A'">
                                     Send Message
                                 </button>
                             </div>
@@ -254,7 +258,11 @@
             total_reviews: 42,
             hourly_rate: 35,
             experience_years: 3,
+<<<<<<< HEAD
             subjects: ["CSSE1001", "Algorithms", "Data Structures", "Python", "Java", "Web Development"],
+=======
+            subjects: ["CSSE1001", "COMP3506", "COMP7505", "COMP2502"],
+>>>>>>> 80fc65396aec2cd5572277290a7612d9db150e65
             location: "University Campus, Online",
             verified: true
         };
