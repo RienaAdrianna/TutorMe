@@ -354,11 +354,11 @@
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('errorMessage');
 
-            // Simple validation (replace with actual authentication)
+            //authenticate login access
             if (email && password) {
-                // Simulate login success
+                //login success
                 alert(`Welcome! Logging in as ${email}...`);
-                // window.location.href = "/dashboard";
+                window.location.href = "homepage.html";
             } else {
                 errorMessage.style.display = 'block';
                 setTimeout(() => {
