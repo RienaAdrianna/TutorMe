@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutor Dashboard - UQ TutorMatch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #51247A;
+            --primary-hover: #3d1b5c;
+            --primary-light: #6b2f96;
+            --secondary-color: #f8f4ff;
+            --accent-color: #7c3aed;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --success-color: #059669;
+            --success-light: #d1fae5;
+            --warning-color: #d97706;
+            --warning-light: #fef3c7;
+            --danger-color: #dc2626;
+            --danger-light: #fee2e2;
+            --border-color: #e5e7eb;
+            --card-bg: #ffffff;
+            --hover-bg: #f3f4f6;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(81 36 122 / 0.15);
+            --border-radius: 0.5rem;
+            --animation-duration: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #51247A 0%, #6b2f96 30%, #8b5cf6 60%, #c084fc 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            transition: all var(--animation-duration) ease;
+            margin: 0;
+            padding: 0;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            animation: containerPulse 4s ease-in-out infinite;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmerEffect 3s infinite;
+            z-index: 1;
+        }
+
+        .container > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes containerPulse {
+            0%, 100% { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+            50% { box-shadow: 0 35px 60px -12px rgba(81, 36, 122, 0.3); }
+        }
+
+        @keyframes shimmerEffect {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Navigation Styles */
+        .nav-bar {
+            position: relative;
+            background-color: #4B2E83;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-logo-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: #6B46C1;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-logo h1 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: white;
+            margin: 0;
+        }
+
+        .nav-logo p {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            color: #c4b5fd;
+        }
+
+        .nav-item.active {
+            color: #c4b5fd;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-item i {
+            font-size: 0.875rem;
+        }
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-5px) scale(1.05); }
+        }
+
+        @keyframes logoSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Header */
+        .header {
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.25rem;
+            font-weight: bold;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+        }
+
+        /* Tabs */
+        .tabs-container {
+            margin-bottom: 2rem;
+        }
+
+        .tabs-list {
+            display: flex;
+            background: var(--secondary-color);
+            border-radius: var(--border-radius);
+            padding: 0.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-trigger {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: transparent;
+            border-radius: calc(var(--border-radius) - 0.25rem);
+            color: var(--text-secondary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--animation-duration) ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-trigger::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+            transform: scaleX(0);
+            transition: transform var(--animation-duration) ease;
+        }
+
+        .tab-trigger:hover {
+            background: rgba(255, 255, 255, 0.7);
+            transform: translateY(-1px);
+        }
+
+        .tab-trigger.active {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 15px rgba(81, 36, 122, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .tab-trigger.active::before {
+            transform: scaleX(1);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            transition: all var(--animation-duration) ease;
+            border: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            position: relative;
+            transform-origin: center;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-light), var(--accent-color));
+            transform: scaleX(0);
+            transition: transform var(--animation-duration) ease;
+            z-index: 1;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%);
+            opacity: 0;
+            transition: opacity var(--animation-duration) ease;
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(81, 36, 122, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover::after {
+            opacity: 1;
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .card-title h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .card-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: normal;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            background: var(--secondary-color);
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: capitalize;
+            gap: 0.25rem;
+            position: relative;
+            overflow: hidden;
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+
+        .badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: badgeShine 2.5s infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes badgeShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .badge-pending {
+            background: var(--warning-light);
+            color: var(--warning-color);
+        }
+
+        .badge-accepted {
+            background: var(--success-light);
+            color: var(--success-color);
+        }
+
+        .badge-declined {
+            background: var(--danger-light);
+            color: var(--danger-color);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            text-decoration: none;
+            transition: all var(--animation-duration) ease;
+            cursor: pointer;
+            border: none;
+            font-size: 0.875rem;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            transform-origin: center;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.4s ease;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #047857;
+            transform: translateY(-1px);
+        }
+
+        .btn-danger {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #b91c1c;
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-ghost:hover {
+            background: var(--hover-bg);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn:disabled:hover {
+            transform: none;
+        }
+
+        /* Message boxes */
+        .message-box {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--border-color);
+            margin: 1rem 0;
+            color: var(--text-primary);
+            position: relative;
+            overflow: hidden;
+            animation: messageGlow 3s ease-in-out infinite;
+        }
+
+        .message-box::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary-color), var(--primary-light), var(--primary-color));
+            animation: borderFlow 2s linear infinite;
+        }
+
+        @keyframes messageGlow {
+            0%, 100% { box-shadow: inset 0 0 10px rgba(81, 36, 122, 0.1); }
+            50% { box-shadow: inset 0 0 20px rgba(81, 36, 122, 0.2); }
+        }
+
+        @keyframes borderFlow {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 0% 100%; }
+        }
+
+        .reply-box {
+            background: #faf5ff;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            border: 1px solid #e9d5ff;
+            margin-top: 1rem;
+        }
+
+        .reply-header {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Forms */
+        .form-group {
+            margin: 1rem 0;
+        }
+
+        .textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            resize: vertical;
+            font-family: inherit;
+            transition: border-color var(--animation-duration) ease;
+        }
+
+        .textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(81, 36, 122, 0.1);
+        }
+
+        /* Empty states */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .empty-icon {
+            width: 4rem;
+            height: 4rem;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-description {
+            color: var(--text-secondary);
+        }
+
+        /* Loading spinner */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 16rem;
+        }
+
+        .spinner {
+            width: 2rem;
+            height: 2rem;
+            border: 3px solid var(--border-color);
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-wrapper {
+                padding: 1rem;
+            }
+            
+            .container {
+                padding: 1.5rem;
+                margin: 0;
+                border-radius: 0.75rem;
+            }
+            .card-title {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .tabs-list {
+                flex-direction: column;
+            }
+            
+            .tab-trigger {
+                justify-content: flex-start;
+            }
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .reply-form {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="px-8 py-6" style="background-color: #4B2E83;">
+        <div class="max-w-7xl mx-auto flex items-center justify-between" >
+            <!-- Logo -->
+            <div class="flex items-center gap-3" >
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3" style="background-color: #4B2E83;">
+                        <i class="fas fa-graduation-cap text-white text-lg"></i>
+                    </div>
+                <div>
+                    <h1 class="text-xl font-bold text-white">UQ TutorMatch</h1>
+                    <p class="text-sm text-white">University of Queensland</p>
+                </div>
+            </div>
+            
+            <!-- Navigation Links -->
+            <div class="flex items-center gap-8">
+                <a href="#" class="nav-item text-white font-semibold flex items-center gap-2">
+                    <i class="fas fa-home text-sm"></i>
+                    Home
+                </a>
+                <a href="browse.html" class="nav-item text-white font-medium flex items-center gap-2">
+                    <i class="fas fa-users text-sm"></i>
+                    Browse Tutors
+                </a>
+                <a href="#" class="nav-item text-white font-medium flex items-center gap-2">
+                    <i class="fas fa-th-large text-sm"></i>
+                    Dashboard
+                </a>
+                <a href="#" class="nav-item text-white font-medium flex items-center gap-2">
+                    <i class="fas fa-sign-out-alt text-sm"></i>
+                    Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <div class="header">
+                <h1>Tutor Dashboard</h1>
+                <p>Welcome back, Dr. Smith! Manage your tutoring requests below.</p>
+            </div>
+
+            <div class="tabs-container">
+                <div class="tabs-list">
+                    <button class="tab-trigger active" data-tab="pending">
+                        <i class="fas fa-clock"></i>
+                        Pending (<span id="pending-count">2</span>)
+                    </button>
+                    <button class="tab-trigger" data-tab="accepted">
+                        <i class="fas fa-check"></i>
+                        Accepted (<span id="accepted-count">1</span>)
+                    </button>
+                    <button class="tab-trigger" data-tab="history">
+                        <i class="fas fa-book"></i>
+                        History (<span id="history-count">1</span>)
+                    </button>
+                </div>
+
+                <!-- Pending Tab -->
+                <div class="tab-content active" id="pending-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <div>
+                                    <h3>Request for Mathematics</h3>
+                                    <p class="card-subtitle">From: John Doe • john.doe@student.uq.edu.au</p>
+                                </div>
+                                <span class="badge badge-pending">
+                                    <i class="fas fa-clock"></i>
+                                    pending
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div>
+                                <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Student's Message:</h4>
+                                <div class="message-box">
+                                    I need help with calculus, specifically integration by parts. I'm struggling with the concept and would appreciate a thorough explanation with examples. I have an exam coming up next week.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="btn-group">
+                                <button class="btn btn-success" onclick="showReplyForm('request-1')">
+                                    <i class="fas fa-check"></i>
+                                    Accept & Reply
+                                </button>
+                                <button class="btn btn-danger" onclick="updateStatus('request-1', 'declined')">
+                                    <i class="fas fa-times"></i>
+                                    Decline
+                                </button>
+                            </div>
+                            <div class="reply-form hidden" id="reply-form-request-1">
+                                <div class="form-group">
+                                    <textarea class="textarea" rows="3" placeholder="Write your reply to the student..." id="reply-message-request-1"></textarea>
+                                </div>
+                                <div class="btn-group">
+                                    <button class="btn btn-primary" onclick="submitReply('request-1')">
+                                        Send Reply
+                                    </button>
+                                    <button class="btn btn-ghost" onclick="hideReplyForm('request-1')">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <div>
+                                    <h3>Request for Physics</h3>
+                                    <p class="card-subtitle">From: Jane Smith • jane.smith@student.uq.edu.au</p>
+                                </div>
+                                <span class="badge badge-pending">
+                                    <i class="fas fa-clock"></i>
+                                    pending
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div>
+                                <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Student's Message:</h4>
+                                <div class="message-box">
+                                    Looking for help with quantum mechanics fundamentals. I'm having trouble understanding wave-particle duality and need some guidance on the mathematical formulations.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="btn-group">
+                                <button class="btn btn-success" onclick="showReplyForm('request-2')">
+                                    <i class="fas fa-check"></i>
+                                    Accept & Reply
+                                </button>
+                                <button class="btn btn-danger" onclick="updateStatus('request-2', 'declined')">
+                                    <i class="fas fa-times"></i>
+                                    Decline
+                                </button>
+                            </div>
+                            <div class="reply-form hidden" id="reply-form-request-2">
+                                <div class="form-group">
+                                    <textarea class="textarea" rows="3" placeholder="Write your reply to the student..." id="reply-message-request-2"></textarea>
+                                </div>
+                                <div class="btn-group">
+                                    <button class="btn btn-primary" onclick="submitReply('request-2')">
+                                        Send Reply
+                                    </button>
+                                    <button class="btn btn-ghost" onclick="hideReplyForm('request-2')">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accepted Tab -->
+                <div class="tab-content" id="accepted-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <div>
+                                    <h3>Request for Chemistry</h3>
+                                    <p class="card-subtitle">From: Mike Johnson • mike.johnson@student.uq.edu.au</p>
+                                </div>
+                                <span class="badge badge-accepted">
+                                    <i class="fas fa-check"></i>
+                                    accepted
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div>
+                                <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Student's Message:</h4>
+                                <div class="message-box">
+                                    Need assistance with organic chemistry reactions and mechanisms. I'm particularly struggling with SN1 and SN2 reactions.
+                                </div>
+                            </div>
+                            <div class="reply-box">
+                                <div class="reply-header">
+                                    <i class="fas fa-comment-dots"></i>
+                                    Your Reply
+                                </div>
+                                <p>I'd be happy to help you with organic chemistry! I have extensive experience in this area and can provide clear explanations with practical examples. Let's schedule a session to go over SN1 and SN2 reactions step by step.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- History Tab -->
+                <div class="tab-content" id="history-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <div>
+                                    <h3>Request for Biology</h3>
+                                    <p class="card-subtitle">From: Sarah Wilson • sarah.wilson@student.uq.edu.au</p>
+                                </div>
+                                <span class="badge badge-declined">
+                                    <i class="fas fa-times"></i>
+                                    declined
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div>
+                                <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Student's Message:</h4>
+                                <div class="message-box">
+                                    I need help with molecular biology concepts, particularly DNA replication and transcription processes.
+                                </div>
+                            </div>
+                            <div class="reply-box">
+                                <div class="reply-header">
+                                    <i class="fas fa-comment-dots"></i>
+                                    Your Reply
+                                </div>
+                                <p>Unfortunately, I'm fully booked this month and molecular biology is outside my area of expertise. I recommend reaching out to other biology tutors in our department.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('.tab-trigger').forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const tabId = trigger.getAttribute('data-tab');
+                
+                // Remove active class from all triggers and contents
+                document.querySelectorAll('.tab-trigger').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked trigger and corresponding content
+                trigger.classList.add('active');
+                document.getElementById(tabId + '-tab').classList.add('active');
+            });
+        });
+
+        // Reply form functionality
+        function showReplyForm(requestId) {
+            const form = document.getElementById(`reply-form-${requestId}`);
+            form.classList.remove('hidden');
+        }
+
+        function hideReplyForm(requestId) {
+            const form = document.getElementById(`reply-form-${requestId}`);
+            form.classList.add('hidden');
+            document.getElementById(`reply-message-${requestId}`).value = '';
+        }
+
+        function submitReply(requestId) {
+            const message = document.getElementById(`reply-message-${requestId}`).value.trim();
+            if (!message) {
+                alert('Please enter a reply message.');
+                return;
+            }
+            
+            // Simulate API call
+            setTimeout(() => {
+                alert('Reply sent successfully! The request has been moved to accepted.');
+                hideReplyForm(requestId);
+                // In a real app, you would update the UI to move the card to accepted tab
+                updateCounts();
+            }, 500);
+        }
+
+        function updateStatus(requestId, status) {
+            const statusText = status === 'declined' ? 'declined' : 'accepted';
+            if (confirm(`Are you sure you want to ${statusText === 'declined' ? 'decline' : 'accept'} this request?`)) {
+                // Simulate API call
+                setTimeout(() => {
+                    alert(`Request ${statusText} successfully!`);
+                    // In a real app, you would update the UI to move the card to appropriate tab
+                    updateCounts();
+                }, 500);
+            }
+        }
+
+        function updateCounts() {
+            // Simulate count updates
+            document.getElementById('pending-count').textContent = '0';
+            document.getElementById('accepted-count').textContent = '2';
+            document.getElementById('history-count').textContent = '2';
+        }
+
+        // Add dynamic visual effects
+        document.addEventListener('DOMContentLoaded', () => {
+            // Floating animation for cards
+            document.querySelectorAll('.card').forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.2}s`;
+                card.style.animation = 'cardFloat 4s ease-in-out infinite';
+                
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-8px) scale(1.02)';
+                    card.style.boxShadow = '0 20px 40px rgba(81, 36, 122, 0.2)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0) scale(1)';
+                    card.style.boxShadow = 'var(--shadow-sm)';
+                });
+            });
+
+            // Dynamic background particles
+            createParticles();
+            
+            // Smooth scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'slideInUp 0.6s ease-out';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.card').forEach(card => {
+                observer.observe(card);
+            });
+
+            // Add ripple effect to buttons
+            document.querySelectorAll('.btn').forEach(button => {
+                button.addEventListener('click', createRipple);
+            });
+        });
+
+        function createParticles() {
+            const particleContainer = document.createElement('div');
+            particleContainer.className = 'particles';
+            particleContainer.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: -1;
+            `;
+            document.body.appendChild(particleContainer);
+
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    width: ${Math.random() * 6 + 2}px;
+                    height: ${Math.random() * 6 + 2}px;
+                    background: rgba(255, 255, 255, ${Math.random() * 0.5 + 0.1});
+                    border-radius: 50%;
+                    top: ${Math.random() * 100}%;
+                    left: ${Math.random() * 100}%;
+                    animation: particleFloat ${Math.random() * 10 + 5}s linear infinite;
+                `;
+                particleContainer.appendChild(particle);
+            }
+        }
+
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const ripple = document.createElement('span');
+            const rect = button.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = event.clientX - rect.left - size / 2;
+            const y = event.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+                background: rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                transform: scale(0);
+                animation: ripple 0.6s linear;
+                pointer-events: none;
+            `;
+            
+            button.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        }
+
+        // Add CSS animations
+        const dynamicStyles = document.createElement('style');
+        dynamicStyles.textContent = `
+            @keyframes cardFloat {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-3px); }
+            }
+            
+            @keyframes slideInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            @keyframes particleFloat {
+                0% {
+                    transform: translateY(0px) rotate(0deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(dynamicStyles);
+    </script>
+</body>
+</html>
