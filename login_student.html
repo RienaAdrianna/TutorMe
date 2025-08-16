@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Login - UQ Tutor Match</title>
+    <title>Student Login - UQ TutorMe</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -37,7 +37,7 @@
 
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-5px); }
         }
 
         .back-btn {
@@ -67,7 +67,7 @@
         .logo {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: #F5C842;
+            color: #e5bf4d;
         }
 
         h1 {
@@ -290,8 +290,8 @@
             <div class="logo">
                 <i class="fas fa-user-graduate"></i>
             </div>
-            <h1>Welcome Back</h1>
-            <p class="subtitle">Sign in to find your perfect tutor</p>
+            <h1>Welcome</h1>
+            <p class="subtitle">Sign in to find your tutor</p>
         </div>
 
         <div class="error-message" id="errorMessage">
@@ -300,10 +300,10 @@
 
         <form id="loginForm">
             <div class="form-group">
-                <label for="email">Email Address</label>
+                <label for="email">UQ Username</label>
                 <div class="input-wrapper">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" id="email" name="email" placeholder="your.email@uq.edu.au" required>
+                    <input type="email" id="email" name="email" placeholder="username@student.uq.edu.au" required>
                 </div>
             </div>
 
@@ -325,34 +325,21 @@
         </form>
 
         <div class="divider">
-            <span>or continue with</span>
         </div>
 
-        <button class="btn btn-google" onclick="signInWithGoogle()">
-            <i class="fab fa-google"></i>
-            Sign in with Google
-        </button>
-
-        <div class="signup-link">
-            <p>Don't have an account?</p>
-            <a href="#" onclick="goToSignup()">Create Account</a>
-        </div>
+        
     </div>
 
+    <!-- JS code -->
     <script>
         function goBack() {
             alert("Redirecting back to home page...");
-            // window.location.href = "/";
+            window.location.href = "landing_page.html";
         }
 
         function forgotPassword() {
             alert("Redirecting to password reset...");
             // window.location.href = "/forgot-password";
-        }
-
-        function signInWithGoogle() {
-            alert("Initiating Google sign in...");
-            // Implement Google OAuth here
         }
 
         function goToSignup() {
@@ -367,11 +354,11 @@
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('errorMessage');
 
-            // Simple validation (replace with actual authentication)
+            //authenticate login access
             if (email && password) {
-                // Simulate login success
-                alert(`Welcome back! Logging in as ${email}...`);
-                // window.location.href = "/dashboard";
+                //login success
+                alert(`Welcome! Logging in as ${email}...`);
+                window.location.href = "homepage.html";
             } else {
                 errorMessage.style.display = 'block';
                 setTimeout(() => {

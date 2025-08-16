@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UQ Tutor Match</title>
+    <title>UQ TutorMe</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -168,7 +168,7 @@
         <h1>UQ Tutor Match</h1>
         
         <p class="tagline">
-            Connect with expert UQ tutors or share your knowledge.<br>
+            Connect with UQ tutors or share your knowledge.<br>
             Your academic success starts here.
         </p>
         
@@ -187,18 +187,18 @@
 
     <script>
         function handleStudent() {
-            // Replace with your actual URL or functionality
-            alert("Redirecting to I'm a student page...");
-            // window.location.href = "/find-tutor";
+            // Redirect to student login page
+            alert("Redirecting to Student login page...");
+            window.location.href = "login_student.html";
         }
 
         function handleBecomeTutor() {
-            // Replace with your actual URL or functionality
-            alert("Redirecting to Become a Tutor page...");
+            // Repdirect to tutor login page
+            alert("Redirecting to Tutor login page...");
             // window.location.href = "/become-tutor";
         }
 
-        // Add some interactive effects
+        // interactive effects
         document.querySelectorAll('.btn').forEach(button => {
             button.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-5px) scale(1.05)';
