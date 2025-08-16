@@ -7,97 +7,102 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-        
-        * {
-            font-family: 'Inter', sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #faf7ff 0%, #f3f0ff 50%, #ede7ff 100%);
-            min-height: 100vh;
-        }
-        
-        .hero-image {
-            background: linear-gradient(135deg, #e0d4f7 0%, #f7f0d4 100%);
-            border-radius: 24px;
-            overflow: hidden;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #51247A 0%, #7c3aed 100%);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
-        }
-        
-        .btn-secondary {
-            background: white;
-            border: 2px solid #e5e7eb;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-secondary:hover {
-            border-color: #51247A;
-            transform: translateY(-1px);
-        }
-        
-        .nav-item {
-            transition: all 0.3s ease;
-        }
-        
-        .nav-item:hover {
-            color: #51247A;
-        }
-        
-        .stats-item {
+       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    * {
+    font-family: 'Inter', sans-serif;
+    }
+
+    body {
+    background: linear-gradient(135deg, #51247A 0%, #6D35A8 100%);
+    min-height: 100vh;
+    }
+
+    .hero-image {
+    background: linear-gradient(135deg, #ede6f7 0%, #d9c8ef 100%);
+    border-radius: 24px;
+    overflow: hidden;
+    }
+
+    /* Primary button - UQ Purple */
+    .btn-primary {
+    background: linear-gradient(135deg, #51247A 0%, #6D35A8 100%);
+    transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(81, 36, 122, 0.3);
+    }
+
+    /* Secondary button */
+    .btn-secondary {
+    background: white;
+    border: 2px solid #e5e7eb;
+    transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+    border-color: #51247A;
+    transform: translateY(-1px);
+    }
+
+    /* Navigation links */
+    .nav-item {
+    transition: all 0.3s ease;
+    }
+
+    .nav-item:hover {
+    color: #51247A;
+    }
+
+    /* Stats section fade animation */
+    .stats-item {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+    }
+    
+    .stats-item:nth-child(2) {
+    animation-delay: 0.2s;
+    }
+    @keyframes fadeInUp {
+        from {
             opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
+            transform: translateY(20px);
         }
-        
-        .stats-item:nth-child(2) {
-            animation-delay: 0.2s;
+        to {
+            opacity: 1;
+            transform: translateY(0);
         }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .badge {
-            background: rgba(139, 92, 246, 0.1);
-            color: #51247A;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .search-input {
-            background: white;
-            border: 2px solid #f3f4f6;
-            border-radius: 12px;
-            padding: 16px 20px;
-            width: 300px;
-            transition: all 0.3s ease;
-        }
-        
-        .search-input:focus {
-            border-color: #51247A;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
-        }
+    }
+
+    /* Badge style */
+    .badge {
+        background: rgba(81, 36, 122, 0.1);
+        color: #51247A;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* Search input */
+    .search-input {
+        background: white;
+        border: 2px solid #f3f4f6;
+        border-radius: 12px;
+        padding: 16px 20px;
+        width: 300px;
+        transition: all 0.3s ease;
+    }
+    .search-input:focus {
+        border-color: #51247A;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(81, 36, 122, 0.1);
+    }
+
     </style>
 </head>
 <body>
@@ -110,26 +115,26 @@
                     <i class="fas fa-book text-white text-xl"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl font-bold text-gray-900">UQ TutorMatch</h1>
-                    <p class="text-sm text-gray-500">University of Queensland</p>
+                    <h1 class="text-xl font-bold text-white">UQ TutorMatch</h1>
+                    <p class="text-sm text-white">University of Queensland</p>
                 </div>
             </div>
             
             <!-- Navigation Links -->
             <div class="flex items-center gap-8">
-                <a href="#" class="nav-item text-purple-600 font-semibold flex items-center gap-2">
+                <a href="#" class="nav-item text-white font-semibold flex items-center gap-2">
                     <i class="fas fa-home text-sm"></i>
                     Home
                 </a>
-                <a href="#" class="nav-item text-gray-600 font-medium flex items-center gap-2">
+                <a href="#" class="nav-item text-white font-medium flex items-center gap-2">
                     <i class="fas fa-users text-sm"></i>
                     Browse Tutors
                 </a>
-                <a href="#" class="nav-item text-gray-600 font-medium flex items-center gap-2">
+                <a href="#" class="nav-item text-white font-medium flex items-center gap-2">
                     <i class="fas fa-th-large text-sm"></i>
                     Dashboard
                 </a>
-                <a href="#" class="nav-item text-gray-600 font-medium flex items-center gap-2">
+                <a href="#" class="nav-item text-white font-medium flex items-center gap-2">
                     <i class="fas fa-sign-out-alt text-sm"></i>
                     Logout
                 </a>
@@ -237,10 +242,10 @@
     <section class="px-8 py-20 mt-16">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                <h2 class="text-4xl font-bold text-white mb-4">
                     Meet Our Top Tutors
                 </h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                <p class="text-xl text-white max-w-2xl mx-auto">
                     Learn from high-achieving UQ students who have mastered their subjects
                 </p>
             </div>
@@ -381,7 +386,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="px-8 py-20 bg-gradient-to-r from-purple-600 to-purple-800">
+    <section class="px-8 py-20" style="background: linear-gradient(90deg, #51247A 0%, #6D35A8 100%);">
         <div class="max-w-4xl mx-auto text-center">
             <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
                 Ready to Excel in Your Studies?
