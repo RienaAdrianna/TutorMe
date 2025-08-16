@@ -15,7 +15,6 @@
 
     body {
     background: linear-gradient(135deg, #51247A 0%, #6D35A8 100%);
-    min-height: 100vh;
     }
 
     .hero-image {
@@ -75,6 +74,24 @@
             transform: translateY(0);
         }
     }
+
+    /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,255,255,0.5);
+        }
 
     /* Badge style */
     .badge {
