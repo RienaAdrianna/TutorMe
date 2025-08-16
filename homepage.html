@@ -126,7 +126,7 @@
                     <i class="fas fa-home text-sm"></i>
                     Home
                 </a>
-                <a href="browse.html" class="nav-item text-white font-medium flex items-center gap-2">
+                <a href="#" onclick="toBrowse()" class="nav-item text-white font-medium flex items-center gap-2">
                     <i class="fas fa-users text-sm"></i>
                     Browse Tutors
                 </a>
@@ -394,6 +394,11 @@
     </section>
 
     <script>
+
+        //function
+        function toBrowse() {
+            window.location.href = "browse.html";
+        }
         // Smooth scroll animations
         document.addEventListener('DOMContentLoaded', function() {
             // Intersection Observer for animations
