@@ -522,11 +522,11 @@
             
             <!-- Navigation Links -->
             <div class="flex items-center gap-8">
-                <a href="#" class="nav-item text-white font-semibold flex items-center gap-2">
+                <a href="std_homepage.html" class="nav-item text-white font-semibold flex items-center gap-2">
                     <i class="fas fa-home text-sm"></i>
                     Home
                 </a>
-                <a href="browse.html" class="nav-item text-white font-medium flex items-center gap-2">
+                <a onclick="toBrowse()" class="nav-item text-white font-medium flex items-center gap-2">
                     <i class="fas fa-users text-sm"></i>
                     Browse Tutors
                 </a>
@@ -602,6 +602,10 @@
                 tutor: { name: "Dr. Williams", faculty: "Chemistry Department" }
             }
         ];
+
+        function toBrowse(){
+            window.location.href = "studBrowse.html";
+        }
 
         function getStatusConfig(status) {
             const configs = {
