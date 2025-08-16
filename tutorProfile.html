@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutor Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        /* Navigation links */
+        .nav-item {
+            transition: all 0.3s ease;
+        }
+        .nav-item:hover {
+            color: #8b5cf6;
+        }
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <!-- Navigation -->
+    <nav class="px-8 py-6" style="background-color: #51247A;">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3">
+                        <i class="fas fa-graduation-cap text-white text-lg"></i>
+                    </div>
+                <div>
+                    <h1 class="text-xl font-bold text-white">UQ TutorMe</h1>
+                    <p class="text-sm text-white">University of Queensland</p>
+                </div>
+            </div>
+            
+            <!-- Navigation Links -->
+            <div class="flex items-center gap-8">
+                <a href="#" class="nav-item text-white font-semibold flex items-center gap-2">
+                    <i class="fas fa-home text-sm"></i>
+                    Home
+                </a>
+                <a href="#" onclick="toBrowse()" class="nav-item text-white font-medium flex items-center gap-2">
+                    <i class="fas fa-users text-sm"></i>
+                    Browse Tutors
+                </a>
+                <a href="#" class="nav-item text-white font-medium flex items-center gap-2">
+                    <i class="fas fa-th-large text-sm"></i>
+                    Dashboard
+                </a>
+                <a href="#" class="nav-item text-white font-medium flex items-center gap-2">
+                    <i class="fas fa-sign-out-alt text-sm"></i>
+                    Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div id="bookingSuccessAlert" class="hidden mb-6 bg-green-50 border border-green-200 rounded-md p-4">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <i data-lucide="check-circle" class="h-4 w-4 text-green-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-green-800">
+                        Your booking request has been sent successfully! The tutor will contact you soon.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Main Profile -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Profile Header -->
+                <div class="bg-white border-0 shadow-lg rounded-lg overflow-hidden">
+                    <div class="p-8">
+                        <div class="flex flex-col md:flex-row items-start space-y-6 md:space-y-0 md:space-x-6">
+                            <div class="relative">
+                                <div id="tutorAvatar" class="w-32 h-32 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center">
+                                    <!-- Avatar will be dynamically inserted here -->
+                                </div>
+                                <div id="verifiedBadge" class="hidden absolute -top-2 -right-2">
+                                    <i data-lucide="check-circle" class="w-8 h-8 text-green-500 bg-white rounded-full p-1"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="flex-1 text-center md:text-left">
+                                <div class="flex items-center justify-center md:justify-start space-x-3 mb-2">
+                                    <h1 id="tutorName" class="text-3xl font-bold text-gray-900"></h1>
+                                    <div id="verifiedTag" class="hidden">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Verified</span>
+                                    </div>
+                                </div>
+                                <p id="tutorFaculty" class="text-xl text-purple-600 font-semibold mb-2"></p>
+                                <p id="tutorYear" class="text-gray-600 mb-4"></p>
+                                
+                                <div class="flex flex-wrap justify-center md:justify-start items-center gap-4 mb-4">
+                                    <div id="ratingStars" class="flex items-center space-x-1">
+                                        <!-- Stars will be dynamically inserted here -->
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                                    <div>
+                                        <p id="hourlyRate" class="text-2xl font-bold text-gray-900"></p>
+                                        <p class="text-sm text-gray-600">per hour</p>
+                                    </div>
+                                    <div>
+                                        <p id="experienceYears" class="text-2xl font-bold text-gray-900"></p>
+                                        <p class="text-sm text-gray-600">years experience</p>
+                                    </div>
+                                    <div>
+                                        <p id="subjectsCount" class="text-2xl font-bold text-gray-900"></p>
+                                        <p class="text-sm text-gray-600">subjects</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About -->
+                <div class="bg-white border-0 shadow-lg rounded-lg overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h3 class="text-lg font-medium text-gray-900">About</h3>
+                    </div>
+                    <div class="p-6">
+                        <p id="tutorBio" class="text-gray-700 leading-relaxed">
+                            <!-- Bio will be dynamically inserted here -->
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Subjects -->
+                <div class="bg-white border-0 shadow-lg rounded-lg overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h3 class="text-lg font-medium text-gray-900">Subjects I Teach</h3>
+                    </div>
+                    <div class="p-6">
+                        <div id="subjectsList" class="flex flex-wrap gap-3">
+                            <!-- Subjects will be dynamically inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-6">
+                <!-- Quick Info -->
+                <div class="bg-white border-0 shadow-lg rounded-lg overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h3 class="text-lg font-medium text-gray-900">Quick Info</h3>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-gray-400"></i>
+                            <span id="tutorLocation" class="text-gray-700"></span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="clock" class="w-5 h-5 text-gray-400"></i>
+                            <span class="text-gray-700">Available now</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="calendar" class="w-5 h-5 text-gray-400"></i>
+                            <span class="text-gray-700">Flexible scheduling</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div class="bg-white border-0 shadow-lg rounded-lg overflow-hidden">
+                    <div class="p-6">
+                        <div id="loginPrompt" class="text-center space-y-3">
+                            <p class="text-gray-600">You must be logged in to contact a tutor.</p>
+                            <button onclick="handleLogin()" class="w-full bg-purple-700 hover:bg-purple-800 text-white font-medium py-2 px-4 rounded-md">
+                                Login to Book
+                            </button>
+                        </div>
+                        
+                        <div id="contactButton" class="space-y-4">
+                            <button onclick="showBookingForm()" class="w-full bg-purple-700 hover:bg-purple-800 h-12 text-lg font-semibold text-white rounded-md flex items-center justify-center">
+                                <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
+                                Contact This Tutor
+                            </button>
+                            <div class="text-center text-sm text-gray-500">
+                                Response time: Usually within 2 hours
+                            </div>
+                        </div>
+                        
+                        <form id="bookingForm" class="hidden space-y-4" onsubmit="submitBookingForm(event)">
+                            <h3 class="text-lg font-semibold mb-4">Contact <span id="formTutorName"></span></h3>
+                            
+                            <div id="bookingError" class="hidden bg-red-50 border border-red-200 rounded-md p-4 text-red-800">
+                                <!-- Error message will appear here -->
+                            </div>
+
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+                                <input type="text" id="name" required disabled
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500">
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
+                                <input type="email" id="email" required disabled
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500">
+                            </div>
+                            
+                            <div>
+                                <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                                <input type="text" id="subject" placeholder="e.g., MATH1051" required
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500">
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                                <textarea id="message" rows="4" placeholder="Tell the tutor about what you need help with..." required
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"></textarea>
+                            </div>
+                            
+                            <div class="flex space-x-3">
+                                <button type="button" onclick="hideBookingForm()" class="flex-1 bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                                    Cancel
+                                </button>
+                                <button type="submit" id="submitButton" class="flex-1 bg-purple-700 hover:bg-purple-800 text-white font-medium py-2 px-4 rounded-md">
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Sample tutor data - in a real app, this would come from an API
+        const tutorData = {
+            id: "12345",
+            name: "Alex Johnson",
+            faculty: "Computer Science",
+            year_level: "3rd Year",
+            bio: "I'm a passionate computer science student with 3 years of tutoring experience. I specialize in helping students understand complex algorithms and data structures. My teaching approach focuses on building strong fundamentals while making learning fun and engaging.",
+            rating: 4.8,
+            total_reviews: 42,
+            hourly_rate: 35,
+            experience_years: 3,
+            subjects: ["Programming", "Algorithms", "Data Structures", "Python", "Java", "Web Development"],
+            location: "University Campus, Online",
+            verified: true
+        };
+
+        // User state - null means not logged in
+        let user = null;
+        // let user = {
+        //     id: "user123",
+        //     full_name: "Jane Doe",
+        //     email: "jane@example.com"
+        // };
+
+        // Initialize the page with tutor data
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTutorData();
+            updateUIForUserState();
+        });
+
+        function loadTutorData() {
+            // Set tutor name
+            document.getElementById('tutorName').textContent = tutorData.name;
+            document.getElementById('formTutorName').textContent = tutorData.name;
+            
+            // Set faculty and year
+            document.getElementById('tutorFaculty').textContent = tutorData.faculty;
+            document.getElementById('tutorYear').textContent = tutorData.year_level + " Student";
+            
+            // Set bio or default message
+            document.getElementById('tutorBio').textContent = tutorData.bio || "This tutor hasn't added a biography yet.";
+            
+            // Set location
+            document.getElementById('tutorLocation').textContent = tutorData.location;
+            
+            // Set avatar initial
+            const avatarDiv = document.getElementById('tutorAvatar');
+            const initial = tutorData.name.charAt(0).toUpperCase();
+            avatarDiv.innerHTML = `<span class="text-4xl font-bold text-purple-700">${initial}</span>`;
+            
+            // Show verified badge if tutor is verified
+            if (tutorData.verified) {
+                document.getElementById('verifiedBadge').classList.remove('hidden');
+                document.getElementById('verifiedTag').classList.remove('hidden');
+            }
+            
+            // Create rating stars
+            const ratingContainer = document.getElementById('ratingStars');
+            const fullStars = Math.floor(tutorData.rating);
+            const hasHalfStar = tutorData.rating % 1 >= 0.5;
+            
+            for (let i = 0; i < 5; i++) {
+                const star = document.createElement('i');
+                star.setAttribute('data-lucide', 'star');
+                star.className = `w-5 h-5 ${i < fullStars ? 'text-yellow-400 fill-current' : 'text-gray-300'}`;
+                ratingContainer.appendChild(star);
+                
+                // Add half star if needed
+                if (i === fullStars && hasHalfStar) {
+                    const halfStar = document.createElement('i');
+                    halfStar.setAttribute('data-lucide', 'star');
+                    halfStar.className = 'w-5 h-5 text-yellow-400 fill-current opacity-50';
+                    ratingContainer.appendChild(halfStar);
+                }
+            }
+            
+            // Add rating text
+            const ratingText = document.createElement('span');
+            ratingText.className = 'text-lg font-semibold ml-2';
+            ratingText.textContent = `${tutorData.rating.toFixed(1)} (${tutorData.total_reviews} reviews)`;
+            ratingContainer.appendChild(ratingText);
+            
+            // Set stats
+            document.getElementById('hourlyRate').textContent = `$${tutorData.hourly_rate}`;
+            document.getElementById('experienceYears').textContent = `${tutorData.experience_years}+`;
+            document.getElementById('subjectsCount').textContent = tutorData.subjects.length;
+            
+            // Add subjects
+            const subjectsContainer = document.getElementById('subjectsList');
+            tutorData.subjects.forEach(subject => {
+                const badge = document.createElement('span');
+                badge.className = 'inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-700';
+                badge.textContent = subject;
+                subjectsContainer.appendChild(badge);
+            });
+            
+            // Refresh icons after dynamic content
+            setTimeout(() => lucide.createIcons(), 100);
+        }
+
+        function updateUIForUserState() {
+            const loginPrompt = document.getElementById('loginPrompt');
+            const contactButton = document.getElementById('contactButton');
+            const bookingForm = document.getElementById('bookingForm');
+            
+            if (user) {
+                // User is logged in
+                loginPrompt.classList.add('hidden');
+                contactButton.classList.remove('hidden');
+                bookingForm.classList.add('hidden');
+                
+                // Set user data in form
+                document.getElementById('name').value = user.full_name;
+                document.getElementById('email').value = user.email;
+            } else {
+                // User is not logged in
+                loginPrompt.classList.remove('hidden');
+                contactButton.classList.add('hidden');
+                bookingForm.classList.add('hidden');
+            }
+        }
+
+        function showBookingForm() {
+            document.getElementById('contactButton').classList.add('hidden');
+            document.getElementById('bookingForm').classList.remove('hidden');
+        }
+
+        function hideBookingForm() {
+            document.getElementById('contactButton').classList.remove('hidden');
+            document.getElementById('bookingForm').classList.add('hidden');
+            document.getElementById('bookingError').classList.add('hidden');
+        }
+
+        function handleLogin() {
+            // In a real app, this would redirect to login page or show a login modal
+            alert('Redirecting to login page...');
+            // Simulate login after 1 second
+            setTimeout(() => {
+                user = {
+                    id: "user123",
+                    full_name: "Jane Doe",
+                    email: "jane@example.com"
+                };
+                updateUIForUserState();
+            }, 1000);
+        }
+
+        function submitBookingForm(event) {
+            event.preventDefault();
+            
+            if (!user) {
+                showBookingError("Please login to book a tutor.");
+                return;
+            }
+            
+            // Get form values
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Validate
+            if (!subject || !message) {
+                showBookingError("Please fill in all required fields.");
+                return;
+            }
+            
+            // Disable submit button
+            const submitButton = document.getElementById('submitButton');
+            submitButton.disabled = true;
+            submitButton.textContent = "Sending...";
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Show success
+                document.getElementById('bookingSuccessAlert').classList.remove('hidden');
+                hideBookingForm();
+                
+                // Reset form
+                document.getElementById('subject').value = '';
+                document.getElementById('message').value = '';
+                
+                // Re-enable button
+                submitButton.disabled = false;
+                submitButton.textContent = "Send Message";
+                
+                // Scroll to success message
+                document.getElementById('bookingSuccessAlert').scrollIntoView({ behavior: 'smooth' });
+            }, 1500);
+        }
+
+        function showBookingError(message) {
+            const errorDiv = document.getElementById('bookingError');
+            errorDiv.classList.remove('hidden');
+            errorDiv.textContent = message;
+        }
+    </script>
+</body>
+</html>
