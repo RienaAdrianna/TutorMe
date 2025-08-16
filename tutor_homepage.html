@@ -134,7 +134,7 @@
                     <i class="fas fa-th-large text-sm"></i>
                     Dashboard
                 </a>
-                <a href="#" class="nav-item text-white font-medium flex items-center gap-2">
+                <a href="#" onclick="toLanding()" class="nav-item text-white font-medium flex items-center gap-2">
                     <i class="fas fa-sign-out-alt text-sm"></i>
                     Logout
                 </a>
@@ -399,6 +399,9 @@
         //function
         function toBrowse() {
             window.location.href = "browse.html";
+        }
+        function toLanding() {
+            window.location.href = "landing_page.html";
         }
         // Smooth scroll animations
         document.addEventListener('DOMContentLoaded', function() {
