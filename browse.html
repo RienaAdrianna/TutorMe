@@ -470,7 +470,8 @@
                         <button class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-500 hover:bg-gray-50 smooth-transition">
                             <i class="fas fa-chevron-left"></i>
                         </button>
-                        <button class="w-10 h-10 flex items-center justify-center rounded-lg border border-purple-600 bg-purple-600 text-white smooth-transition">
+                        <button class="w-10 h-10 flex items-center justify-center rounded-lg border text-white smooth-transition"
+                                style="background-color: #4B2E83; border-color: #4B2E83;">
                             1
                         </button>
                         <button class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 smooth-transition">
@@ -497,7 +498,7 @@
         const sampleTutors = [
             {
                 id: 1,
-                name: "Sarah Chen",
+                name: "Timuoxi Chua Le Mei",
                 faculty: "Science",
                 subjects: ["MATH1071", "MATH1061", "STAT2003"],
                 location: "St Lucia Campus",
@@ -506,7 +507,7 @@
                 hourly_rate: 45,
                 experience_years: 3,
                 bio: "Mathematics tutor specializing in calculus and statistics. Achieved HD in all math courses.",
-                avatar: "SC"
+                avatar: "TC"
             },
             {
                 id: 2,
@@ -536,7 +537,7 @@
             },
             {
                 id: 4,
-                name: "David Kim",
+                name: "Zul Arifin",
                 faculty: "Business",
                 subjects: ["ECON1010", "FINM1416", "MGTS1601"],
                 location: "St Lucia Campus",
@@ -545,13 +546,13 @@
                 hourly_rate: 35,
                 experience_years: 2,
                 bio: "Business and Economics tutor with industry experience. Specializes in financial modeling.",
-                avatar: "DK"
+                avatar: "ZA"
             },
             {
                 id: 5,
                 name: "Lisa Wang",
                 faculty: "Medicine",
-                subjects: ["ANAT1005", "PHYL2100", "PATH3202"],
+                subjects: ["ANAT1005", "PHYL2100", "PATH1000"],
                 location: "Herston Campus",
                 rating: 4.9,
                 reviews: 200,
@@ -562,7 +563,7 @@
             },
             {
                 id: 6,
-                name: "Alex Thompson",
+                name: "Nurin McLovin",
                 faculty: "Arts",
                 subjects: ["PHIL1002", "ENGL1000", "HIST1201"],
                 location: "Online",
@@ -571,7 +572,7 @@
                 hourly_rate: 30,
                 experience_years: 1,
                 bio: "Philosophy and English Literature tutor. Focuses on critical thinking and essay writing skills.",
-                avatar: "AT"
+                avatar: "NM"
             },
             {
                 id: 7,
@@ -785,51 +786,55 @@
             resultsCount.textContent = `${filteredTutors.length} ${filteredTutors.length === 1 ? 'tutor' : 'tutors'} found`;
 
             tutorsGrid.innerHTML = filteredTutors.map(tutor => `
-                <div class="tutor-card bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                    <div class="text-center mb-4">
-                        <div class="w-16 h-16 avatar-gradient rounded-full flex items-center justify-center mx-auto mb-3">
-                            <span class="text-white font-bold text-xl">${tutor.avatar}</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900">${tutor.name}</h3>
-                        <p class="text-purple-600 font-medium">${tutor.faculty}</p>
-                    </div>
-                    
-                    <div class="mb-4">
-                        <div class="flex justify-center items-center gap-2 mb-2">
-                            <div class="star-rating" style="--rating-width: ${(tutor.rating / 5) * 100}%"></div>
-                            <span class="text-gray-600 text-sm">${tutor.rating} (${tutor.reviews}+)</span>
-                        </div>
-                        
-                        <div class="flex justify-center items-center gap-4 text-sm text-gray-600 mb-3">
-                            <div class="flex items-center gap-1">
-                                <i class="fas fa-dollar-sign text-xs text-purple-500"></i>
-                                <span>${tutor.hourly_rate}/hr</span>
-                            </div>
-                            <div class="flex items-center gap-1">
-                                <i class="fas fa-briefcase text-xs text-purple-500"></i>
-                                <span>${tutor.experience_years} yrs</span>
-                            </div>
-                        </div>
-                        
-                        <div class="flex flex-wrap justify-center gap-1 mb-4">
-                            ${tutor.subjects.slice(0, 3).map(subject => `
-                                <span class="badge badge-purple">${subject}</span>
-                            `).join('')}
-                            ${tutor.subjects.length > 3 ? `<span class="badge badge-purple">+${tutor.subjects.length - 3}</span>` : ''}
-                        </div>
-                        
-                        <p class="text-gray-600 text-sm text-center mb-4">${tutor.bio}</p>
-                    </div>
-                    
-                    <div class="text-center">
-                        <button class="w-full text-white py-2 px-4 rounded-lg font-medium shadow-sm hover:shadow-md transition-all smooth-transition"
-                                style="background: linear-gradient(to right, #4B2E83, #6C4EA1);"
-                                onmouseover="this.style.background='linear-gradient(to right, #3A2366, #4B2E83)'"
-                                onmouseout="this.style.background='linear-gradient(to right, #4B2E83, #6C4EA1)'">
-                            View Profile
-                        </button>
-                    </div>
-                </div>
+                <div class="tutor-card bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col h-full">
+    <!-- Avatar + Name + Faculty -->
+    <div class="text-center mb-4">
+        <div class="w-16 h-16 avatar-gradient rounded-full flex items-center justify-center mx-auto mb-3">
+            <span class="text-white font-bold text-xl">${tutor.avatar}</span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900">${tutor.name}</h3>
+        <p class="text-purple-600 font-medium">${tutor.faculty}</p>
+    </div>
+    
+    <!-- Ratings, Info, Subjects, Bio -->
+    <div class="mb-4 flex-1 flex flex-col">
+        <div class="flex justify-center items-center gap-2 mb-2">
+            <div class="star-rating" style="--rating-width: ${(tutor.rating / 5) * 100}%"></div>
+            <span class="text-gray-600 text-sm">${tutor.rating} (${tutor.reviews}+)</span>
+        </div>
+        
+        <div class="flex justify-center items-center gap-4 text-sm text-gray-600 mb-3">
+            <div class="flex items-center gap-1">
+                <i class="fas fa-dollar-sign text-xs text-purple-500"></i>
+                <span>${tutor.hourly_rate}/hr</span>
+            </div>
+            <div class="flex items-center gap-1">
+                <i class="fas fa-briefcase text-xs text-purple-500"></i>
+                <span>${tutor.experience_years} yrs</span>
+            </div>
+        </div>
+        
+        <div class="flex flex-wrap justify-center gap-1 mb-4">
+            ${tutor.subjects.slice(0, 3).map(subject => `
+                <span class="badge badge-purple">${subject}</span>
+            `).join('')}
+            ${tutor.subjects.length > 3 ? `<span class="badge badge-purple">+${tutor.subjects.length - 3}</span>` : ''}
+        </div>
+        
+        <p class="text-gray-600 text-sm text-center mb-4 flex-1">${tutor.bio}</p>
+    </div>
+    
+    <!-- Button stays at bottom -->
+    <div class="text-center mt-auto">
+        <button class="w-full text-white py-2 px-4 rounded-lg font-medium shadow-sm hover:shadow-md transition-all smooth-transition"
+                style="background: linear-gradient(to right, #4B2E83, #6C4EA1);"
+                onmouseover="this.style.background='linear-gradient(to right, #3A2366, #4B2E83)'"
+                onmouseout="this.style.background='linear-gradient(to right, #4B2E83, #6C4EA1)'">
+            View Profile
+        </button>
+    </div>
+</div>
+
             `).join('');
             
             // Show pagination if more than 6 tutors
