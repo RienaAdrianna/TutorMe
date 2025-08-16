@@ -184,13 +184,15 @@
                     <div class="p-6">
                         <div id="loginPrompt" class="text-center space-y-3">
                             <p class="text-gray-600">You must be logged in to contact a tutor.</p>
-                            <button onclick="handleLogin()" class="w-full bg-purple-700 hover:bg-purple-800 text-white font-medium py-2 px-4 rounded-md">
+                            <button onclick="handleLogin()" class="w-full text-white font-medium py-2 px-4 rounded-md" style="background-color: #51247A;" 
+                            onmouseover="this.style.backgroundColor='#3d1b5c'" onmouseout="this.style.backgroundColor='#51247A'">
                                 Login to Book
                             </button>
                         </div>
                         
                         <div id="contactButton" class="space-y-4">
-                            <button onclick="showBookingForm()" class="w-full bg-purple-700 hover:bg-purple-800 h-12 text-lg font-semibold text-white rounded-md flex items-center justify-center">
+                            <button onclick="showBookingForm()" class="w-full h-12 text-lg font-semibold text-white rounded-md flex items-center justify-center" style="background-color: #51247A;" o
+                            nmouseover="this.style.backgroundColor='#3d1b5c'" onmouseout="this.style.backgroundColor='#51247A'">
                                 <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
                                 Contact This Tutor
                             </button>
@@ -234,7 +236,8 @@
                                 <button type="button" onclick="hideBookingForm()" class="flex-1 bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
                                     Cancel
                                 </button>
-                                <button type="submit" id="submitButton" class="flex-1 bg-purple-700 hover:bg-purple-800 text-white font-medium py-2 px-4 rounded-md">
+                                <button type="submit" id="submitButton" class="flex-1 text-white font-medium py-2 px-4 rounded-md" style="background-color: #51247A;" 
+                                onmouseover="this.style.backgroundColor='#3d1b5c'" onmouseout="this.style.backgroundColor='#51247A'">
                                     Send Message
                                 </button>
                             </div>
