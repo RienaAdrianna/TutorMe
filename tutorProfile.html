@@ -182,13 +182,6 @@
                 <!-- Contact -->
                 <div class="bg-white border-0 shadow-lg rounded-lg overflow-hidden">
                     <div class="p-6">
-                        <div id="loginPrompt" class="text-center space-y-3">
-                            <p class="text-gray-600">You must be logged in to contact a tutor.</p>
-                            <button onclick="handleLogin()" class="w-full text-white font-medium py-2 px-4 rounded-md" style="background-color: #51247A;" 
-                            onmouseover="this.style.backgroundColor='#3d1b5c'" onmouseout="this.style.backgroundColor='#51247A'">
-                                Login to Book
-                            </button>
-                        </div>
                         
                         <div id="contactButton" class="space-y-4">
                             <button onclick="showBookingForm()" class="w-full h-12 text-lg font-semibold text-white rounded-md flex items-center justify-center" style="background-color: #51247A;" o
@@ -252,7 +245,7 @@
         // Initialize Lucide icons
         lucide.createIcons();
         
-        // Sample tutor data - in a real app, this would come from an API
+        // Sample tutor data
         const tutorData = {
             id: "12345",
             name: "Alex Johnson",
@@ -383,20 +376,6 @@
             document.getElementById('contactButton').classList.remove('hidden');
             document.getElementById('bookingForm').classList.add('hidden');
             document.getElementById('bookingError').classList.add('hidden');
-        }
-
-        function handleLogin() {
-            // In a real app, this would redirect to login page or show a login modal
-            alert('Redirecting to login page...');
-            // Simulate login after 1 second
-            setTimeout(() => {
-                user = {
-                    id: "user123",
-                    full_name: "Jane Doe",
-                    email: "jane@example.com"
-                };
-                updateUIForUserState();
-            }, 1000);
         }
 
         function submitBookingForm(event) {
