@@ -1,5 +1,5 @@
 Portions of this code/documentation were generated with the help of
-ChatGPT (GPT-5) by OpenAI, and then reviewed and modified 
+ChatGPT (GPT-5) by OpenAI, and then reviewed and modified.
 
 Tools Used:
   a) [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) 
