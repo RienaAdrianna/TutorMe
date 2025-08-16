@@ -191,7 +191,7 @@
                     <i class="fas fa-users text-sm"></i>
                     Browse Tutors
                 </a>
-                <a href="#" onclick="StudDashboard()" class="nav-item text-white font-medium flex items-center gap-2">
+                <a href="studDashboard.html" class="nav-item text-white font-medium flex items-center gap-2">
                     <i class="fas fa-th-large text-sm"></i>
                     Dashboard
                 </a>
@@ -494,11 +494,6 @@
     </div>
 
     <script>
-
-        //Move to studDashboard.html
-        function StudDashboard() {
-            window.location.href = "studDashboard.html";
-        }
         // Sample tutor data
         const sampleTutors = [
             {
@@ -634,6 +629,10 @@
             setupEventListeners();
             renderTutors();
         });
+
+        function studDashboard(){
+            window.href.location="studDashboard.html";
+        }
 
         function setupEventListeners() {
             // Search input
