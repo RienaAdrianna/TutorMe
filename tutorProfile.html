@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutor Profile - UQ TutorMe </title>
+    <title>Tutor Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -46,15 +46,15 @@
             
             <!-- Navigation Links -->
             <div class="flex items-center gap-8">
-                <a href="std_homepage.html" class="nav-item text-white font-semibold flex items-center gap-2">
+                <a href="#" class="nav-item text-white font-semibold flex items-center gap-2">
                     <i class="fas fa-home text-sm"></i>
                     Home
                 </a>
-                <a href="stud_browse.html" class="nav-item text-white font-medium flex items-center gap-2">
+                <a href="#" onclick="toBrowse()" class="nav-item text-white font-medium flex items-center gap-2">
                     <i class="fas fa-users text-sm"></i>
                     Browse Tutors
                 </a>
-                <a href="studDashboard.html" class="nav-item text-white font-medium flex items-center gap-2">
+                <a href="#" class="nav-item text-white font-medium flex items-center gap-2">
                     <i class="fas fa-th-large text-sm"></i>
                     Dashboard
                 </a>
@@ -146,7 +146,7 @@
                 <!-- Subjects -->
                 <div class="bg-white border-0 shadow-lg rounded-lg overflow-hidden">
                     <div class="px-6 py-4 border-b border-gray-200">
-                        <h3 class="text-lg font-medium text-gray-900">Subjects I Tutor</h3>
+                        <h3 class="text-lg font-medium text-gray-900">Subjects I Teach</h3>
                     </div>
                     <div class="p-6">
                         <div id="subjectsList" class="flex flex-wrap gap-3">
@@ -182,10 +182,15 @@
                 <!-- Contact -->
                 <div class="bg-white border-0 shadow-lg rounded-lg overflow-hidden">
                     <div class="p-6">
+                        <div id="loginPrompt" class="text-center space-y-3">
+                            <p class="text-gray-600">You must be logged in to contact a tutor.</p>
+                            <button onclick="handleLogin()" class="w-full bg-purple-700 hover:bg-purple-800 text-white font-medium py-2 px-4 rounded-md">
+                                Login to Book
+                            </button>
+                        </div>
                         
                         <div id="contactButton" class="space-y-4">
-                            <button onclick="showBookingForm()" class="w-full h-12 text-lg font-semibold text-white rounded-md flex items-center justify-center" style="background-color: #51247A;" o
-                            nmouseover="this.style.backgroundColor='#3d1b5c'" onmouseout="this.style.backgroundColor='#51247A'">
+                            <button onclick="showBookingForm()" class="w-full bg-purple-700 hover:bg-purple-800 h-12 text-lg font-semibold text-white rounded-md flex items-center justify-center">
                                 <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
                                 Contact This Tutor
                             </button>
@@ -229,8 +234,7 @@
                                 <button type="button" onclick="hideBookingForm()" class="flex-1 bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
                                     Cancel
                                 </button>
-                                <button type="submit" id="submitButton" class="flex-1 text-white font-medium py-2 px-4 rounded-md" style="background-color: #51247A;" 
-                                onmouseover="this.style.backgroundColor='#3d1b5c'" onmouseout="this.style.backgroundColor='#51247A'">
+                                <button type="submit" id="submitButton" class="flex-1 bg-purple-700 hover:bg-purple-800 text-white font-medium py-2 px-4 rounded-md">
                                     Send Message
                                 </button>
                             </div>
@@ -245,21 +249,27 @@
         // Initialize Lucide icons
         lucide.createIcons();
         
-        // Sample tutor data
-        const tutorData = {
-            id: "12345",
-            name: "Alex Johnson",
-            faculty: "Computer Science",
-            year_level: "3rd Year",
-            bio: "I'm a passionate computer science student with 3 years of tutoring experience. I specialize in helping students understand complex algorithms and data structures. My teaching approach focuses on building strong fundamentals while making learning fun and engaging.",
-            rating: 4.8,
-            total_reviews: 42,
-            hourly_rate: 35,
-            experience_years: 3,
-            subjects: ["CSSE1001", "COMP3506", "COMP7505", "COMP2502"],
-            location: "University Campus, Online",
-            verified: true
-        };
+        // Sample tutor data - in a real app, this would come from an API
+        let tutorData = JSON.parse(localStorage.getItem("selectedTutor"));
+
+        if (!tutorData) {
+            // fallback if someone opens the page directly
+            tutorData = {
+                id: "0",
+                name: "Default Tutor",
+                faculty: "Unknown Faculty",
+                year_level: "N/A",
+                bio: "No tutor selected. Please go back to homepage.",
+                rating: 0,
+                total_reviews: 0,
+                hourly_rate: 0,
+                experience_years: 0,
+                subjects: [],
+                location: "Unknown",
+                verified: false
+            };
+        }
+
 
         // User state - null means not logged in
         let user = null;
@@ -316,7 +326,7 @@
                 if (i === fullStars && hasHalfStar) {
                     const halfStar = document.createElement('i');
                     halfStar.setAttribute('data-lucide', 'star');
-                    halfStar.className = 'w-5 h-5 text-yellow-400 fill-current opacity-10';
+                    halfStar.className = 'w-5 h-5 text-yellow-400 fill-current opacity-50';
                     ratingContainer.appendChild(halfStar);
                 }
             }
@@ -376,6 +386,20 @@
             document.getElementById('contactButton').classList.remove('hidden');
             document.getElementById('bookingForm').classList.add('hidden');
             document.getElementById('bookingError').classList.add('hidden');
+        }
+
+        function handleLogin() {
+            // In a real app, this would redirect to login page or show a login modal
+            alert('Redirecting to login page...');
+            // Simulate login after 1 second
+            setTimeout(() => {
+                user = {
+                    id: "user123",
+                    full_name: "Jane Doe",
+                    email: "jane@example.com"
+                };
+                updateUIForUserState();
+            }, 1000);
         }
 
         function submitBookingForm(event) {
