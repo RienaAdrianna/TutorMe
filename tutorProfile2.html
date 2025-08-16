@@ -140,15 +140,15 @@
             
             <!-- Navigation Links -->
             <div class="flex items-center gap-8">
-                <a href="tutor_homepage.html" class="nav-item text-white font-semibold flex items-center gap-2 underline">
+                <a onclick="toHome()" class="nav-item text-white font-semibold flex items-center gap-2 underline">
                     <i class="fas fa-home text-sm"></i>
                     Home
                 </a>
-                <a href="tutor_browse.html" class="nav-item text-white font-medium flex items-center gap-2">
+                <a onclick="toBrowse()" class="nav-item text-white font-medium flex items-center gap-2">
                     <i class="fas fa-users text-sm"></i>
                     Browse Tutors
                 </a>
-                <a href="tutorDashboard.html" class="nav-item text-white font-medium flex items-center gap-2">
+                <a onclick="toDashboard()" class="nav-item text-white font-medium flex items-center gap-2">
                     <i class="fas fa-th-large text-sm"></i>
                     Dashboard
                 </a>
@@ -414,10 +414,20 @@
 
     <script>
 
-        //function
+        //function to direct page
         function toBrowse() {
             window.location.href = "tutor_browse.html";
         }
+
+        function toHome() {
+            window.location.href = "tutor_homepage.html";
+        }
+
+        function toDashboard() {
+            window.location.href = "tutorDashboard.html"
+        }
+
+
         // Smooth scroll animations
         document.addEventListener('DOMContentLoaded', function() {
             // Intersection Observer for animations
