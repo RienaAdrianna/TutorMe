@@ -3,7 +3,7 @@ UQ TutorMe
 A comprehensive tutoring platform designed for University of Queensland students and tutors to connect, schedule sessions, and manage their academic support needs.
 
 🎓 About
-UQ TutorMe is a web-based platform that provide UQ students another easy way to seek for academic help from qualified tutors. Aside from that, UQ TutorMe also provide another platform or doors for students to gain side income with teaching experience for students with lots of limitation who wish to become a tutor. The platform streamlines the process of finding, booking, and managing tutoring sessions across various subjects and courses offered at UQ.
+UQ TutorMe is a web-based platform that provide UQ students another easy way to seek for academic help from qualified tutors. Aside from that, UQ TutorMe also provide another platform or doors for students to gain side income with teaching experience for students with lots of limitation who wish to become a tutor. The platform streamlines the process of finding, booking, and managing tutoring sessions across various subjects and courses offered at UQ. This website is developed using HTML5, Tailwind CSS and Javascript.
 UQ TutorMe is a website developed by us for UQCS Hackathon2025.
 
 
