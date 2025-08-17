@@ -347,6 +347,9 @@
             // window.location.href = "/signup";
         }
 
+        sessionStorage.setItem('uqEmail', email);
+        window.location.href = 'tutorProfile.html';
+
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             

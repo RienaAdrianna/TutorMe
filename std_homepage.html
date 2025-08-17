@@ -148,7 +148,7 @@
                     <i class="fas fa-users text-sm"></i>
                     Browse Tutors
                 </a>
-                <a href="#" class="nav-item text-white font-medium flex items-center gap-2">
+                <a href="#" onclick="toDashboard()" class="nav-item text-white font-medium flex items-center gap-2">
                     <i class="fas fa-th-large text-sm"></i>
                     Dashboard
                 </a>
@@ -455,7 +455,7 @@
     </section>
 
     <script>
-        //function
+        //function 
         function viewProfile(tutor) {
         localStorage.setItem("selectedTutor", JSON.stringify(tutor));
         window.location.href = "tutorProfile.html";
@@ -464,6 +464,11 @@
         function toBrowse() {
             window.location.href = "stud_browse.html";
         }
+
+        function toDashboard() {
+            window.location.href = "studDashboard.html"
+        }
+
         function toLanding() {
             window.location.href = "landing_page.html";
         }
