@@ -359,6 +359,9 @@
 
             //authenticate login access
             if (email && password) {
+                // Store email in sessionStorage before redirecting
+                sessionStorage.setItem('userEmail', email);
+                
                 //login success
                 alert(`Welcome! Logging in as ${email}...`);
                 window.location.href = "std_homepage.html";
